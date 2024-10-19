@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package doggy.tictactoe;
+package doggy.tictactoe.component;
+
+import doggy.tictactoe.model.GameTable;
 
 /**
  * @author doggy
  * @link
  */
-public class DrawVerifier {
-    public boolean isDraw(final GameTable gameTable) {
-        return false;
+public class ComputerMove {
+    public void make(final GameTable gameTable) {
+
     }
 }

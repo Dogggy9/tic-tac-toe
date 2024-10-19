@@ -14,11 +14,20 @@
  * limitations under the License.
  */
 
-package doggy.tictactoe;
+package doggy.tictactoe.component;
+
+import doggy.tictactoe.model.GameTable;
 
 /**
  * @author doggy
  * @link
  */
-public class GameTable {
+public class WinnerVerifier {
+    public boolean isUserWin(final GameTable gameTable) {
+        return false;
+    }
+
+    public boolean isComputerWin(final GameTable gameTable) {
+        return false;
+    }
 }

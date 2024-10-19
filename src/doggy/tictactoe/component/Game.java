@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package doggy.tictactoe;
+package doggy.tictactoe.component;
+
+import doggy.tictactoe.model.GameTable;
 
 import java.util.Random;
 

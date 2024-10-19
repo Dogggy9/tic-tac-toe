@@ -16,6 +16,8 @@
 
 package doggy.tictactoe;
 
+import doggy.tictactoe.component.*;
+
 /**
  * @author doggy
  * @link
