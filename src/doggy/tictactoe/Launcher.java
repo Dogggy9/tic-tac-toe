@@ -20,4 +20,7 @@ package doggy.tictactoe;
  * @author doggy
  * @link
  */public final class Launcher {
+    public static void main(String[] args) {
+
+    }
 }
