@@ -60,11 +60,8 @@ public class Game {
         }
 
         while (true) {
-
             userMove.make(gameTable);
-
             dataPrinter.printGameTable(gameTable);
-
             if (winnerVerifier.isUserWin(gameTable)) {
                 System.out.println("ТЫ ПОБЕДИЛ!");
                 break;
@@ -88,6 +85,7 @@ public class Game {
                 System.out.println("Извини, НИЧЬЯ!");
                 break;
             }
+            break;
         }
         System.out.println("КОНЕЦ ИГРЫ!");
 

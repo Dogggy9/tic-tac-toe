@@ -21,10 +21,15 @@ import doggy.tictactoe.component.*;
 /**
  * @author doggy
  * @link
- */public final class Launcher {
+ */
+public final class Launcher {
     public static void main(String[] args) {
         final Game game = new Game(
-                new DataPrinter(), new UserMove(), new ComputerMove(), new WinnerVerifier(), new DrawVerifier()
+                new DataPrinter(),
+                new UserMove(),
+                new ComputerMove(),
+                new WinnerVerifier(),
+                new DrawVerifier()
         );
         game.play();
     }
