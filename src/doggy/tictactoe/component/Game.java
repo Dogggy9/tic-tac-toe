@@ -85,7 +85,6 @@ public class Game {
                 System.out.println("Извини, НИЧЬЯ!");
                 break;
             }
-            break;
         }
         System.out.println("КОНЕЦ ИГРЫ!");
 
