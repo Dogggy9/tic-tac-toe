@@ -29,7 +29,7 @@ public final class Launcher {
                 new UserMove(),
                 new ComputerMove(),
                 new WinnerVerifier(),
-                new DrawVerifier()
+                new CellVerifier()
         );
         game.play();
     }
