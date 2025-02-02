@@ -16,7 +16,10 @@
 
 package doggy.tictactoe.component;
 
+import doggy.tictactoe.model.Cell;
 import doggy.tictactoe.model.GameTable;
+
+import java.util.Random;
 
 /**
  * @author doggy
@@ -24,6 +27,15 @@ import doggy.tictactoe.model.GameTable;
  */
 public class ComputerMove {
     public void make(final GameTable gameTable) {
-
+        final Random random = new Random();
+        while (true) {
+            int row = random.nextInt(3);
+            int col = random.nextInt(3);
+            Cell randomCell = new Cell(row, col);
+            if (gameTable.isEmpty(randomCell)) {
+                gameTable.setSign(randomCell, 'O');
+                return;
+            }
+        }
     }
 }
