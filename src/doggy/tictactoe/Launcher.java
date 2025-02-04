@@ -17,6 +17,7 @@
 package doggy.tictactoe;
 
 import doggy.tictactoe.component.*;
+import doggy.tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
 
 /**
  * @author doggy
@@ -24,7 +25,7 @@ import doggy.tictactoe.component.*;
  */
 public final class Launcher {
     public static void main(String[] args) {
-        final CellNumberConverter cellNumberConverter = new CellNumberConverter();
+        final CellNumberConverter cellNumberConverter = new DesktopNumericKeypadCellNumberConverter();
         final Game game = new Game(
                 new DataPrinter(cellNumberConverter),
                 new UserMove(cellNumberConverter),
