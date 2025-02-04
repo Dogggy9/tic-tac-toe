@@ -24,9 +24,10 @@ import doggy.tictactoe.component.*;
  */
 public final class Launcher {
     public static void main(String[] args) {
+        final CellNumberConverter cellNumberConverter = new CellNumberConverter();
         final Game game = new Game(
-                new DataPrinter(),
-                new UserMove(),
+                new DataPrinter(cellNumberConverter),
+                new UserMove(cellNumberConverter),
                 new ComputerMove(),
                 new WinnerVerifier(),
                 new CellVerifier()
