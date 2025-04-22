@@ -21,6 +21,8 @@ import doggy.tictactoe.model.GameTable;
 
 import java.util.Scanner;
 
+import static doggy.tictactoe.model.Sign.X;
+
 /**
  * @author doggy
  * @link
@@ -37,7 +39,7 @@ public class UserMove {
         while (true) {
             final Cell cell = getUserInput();
             if (gameTable.isEmpty(cell)) {
-                gameTable.setSign(cell, 'X');
+                gameTable.setSign(cell, X);
                 return;
             } else {
                 System.out.println("Ячейка не пуста");

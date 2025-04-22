@@ -21,6 +21,8 @@ import doggy.tictactoe.model.GameTable;
 
 import java.util.Random;
 
+import static doggy.tictactoe.model.Sign.O;
+
 /**
  * @author doggy
  * @link
@@ -33,7 +35,7 @@ public class ComputerMove {
             int col = random.nextInt(3);
             Cell randomCell = new Cell(row, col);
             if (gameTable.isEmpty(randomCell)) {
-                gameTable.setSign(randomCell, 'O');
+                gameTable.setSign(randomCell, O);
                 return;
             }
         }
