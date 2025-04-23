@@ -6,5 +6,14 @@ public enum Sign {
 
     O,
 
-    EMPTY
+    EMPTY;
+
+    @Override
+    public String toString() {
+        if (this == EMPTY) {
+            return " ";
+        } else {
+            return name();
+        }
+    }
 }
