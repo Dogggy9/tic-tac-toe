@@ -71,27 +71,30 @@ public class Game {
                     if (winnerVerifier.isUserWin(gameTable)) {
                         System.out.println("ТЫ ПОБЕДИЛ!");
                         gameOver = true;
-                        break;
+                        printGameOver();
+                        return;
                     }
                 } else {
                     if (winnerVerifier.isComputerWin(gameTable)) {
                         System.out.println("КОПЬЮТЕР ПОБЕДИЛ!");
                         gameOver = true;
-                        break;
+                        printGameOver();
+                        return;
                     }
                 }
 
                 if (cellVerifier.allCellsFilled(gameTable)) {
                     System.out.println("Извини, НИЧЬЯ!");
                     gameOver = true;
-                    break;
+                    printGameOver();
+                    return;
                 }
             }
-            if (gameOver) {
-                break;
-            }
         }
-        System.out.println("КОНЕЦ ИГРЫ!");
 
+    }
+
+    private static void printGameOver() {
+        System.out.println("КОНЕЦ ИГРЫ!");
     }
 }
