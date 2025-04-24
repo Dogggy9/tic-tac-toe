@@ -27,7 +27,7 @@ import static doggy.tictactoe.model.Sign.X;
  * @author doggy
  * @link
  */
-public class UserMove {
+public class UserMove implements Move {
 
     private final CellNumberConverter cellNumberConverter;
 
@@ -35,6 +35,7 @@ public class UserMove {
         this.cellNumberConverter = cellNumberConverter;
     }
 
+    @Override
     public void make(final GameTable gameTable) {
         while (true) {
             final Cell cell = getUserInput();

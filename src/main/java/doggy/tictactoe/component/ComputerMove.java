@@ -27,7 +27,9 @@ import static doggy.tictactoe.model.Sign.O;
  * @author doggy
  * @link
  */
-public class ComputerMove {
+public class ComputerMove implements Move {
+
+    @Override
     public void make(final GameTable gameTable) {
         final Random random = new Random();
         while (true) {
