@@ -18,6 +18,7 @@ package doggy.tictactoe.component;
 
 import doggy.tictactoe.model.Cell;
 import doggy.tictactoe.model.GameTable;
+import doggy.tictactoe.model.Player;
 import doggy.tictactoe.model.Sign;
 
 import static doggy.tictactoe.model.Sign.O;
@@ -28,19 +29,12 @@ import static doggy.tictactoe.model.Sign.X;
  * @link
  */
 public class WinnerVerifier {
-    public boolean isUserWin(final GameTable gameTable) {
-        return isWinner(gameTable, X);
-    }
 
-    public boolean isComputerWin(final GameTable gameTable) {
-        return isWinner(gameTable, O);
-    }
-
-    private boolean isWinner(GameTable gameTable, Sign sign) {
-        return verifierRows(gameTable, sign) ||
-                verifierColumns(gameTable, sign) ||
-                verifierMainDiagon(gameTable, sign) ||
-                verifierSecondDiagon(gameTable, sign);
+    public boolean isWinner(GameTable gameTable, final Player player) {
+        return verifierRows(gameTable, player.getSign()) ||
+                verifierColumns(gameTable, player.getSign()) ||
+                verifierMainDiagon(gameTable, player.getSign()) ||
+                verifierSecondDiagon(gameTable, player.getSign());
     }
 
     private boolean verifierRows(GameTable gameTable, Sign sign) {

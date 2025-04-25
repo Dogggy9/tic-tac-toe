@@ -17,8 +17,12 @@
 package doggy.tictactoe.component;
 
 import doggy.tictactoe.model.GameTable;
+import doggy.tictactoe.model.Player;
 
 import java.util.Random;
+
+import static doggy.tictactoe.model.Sign.O;
+import static doggy.tictactoe.model.Sign.X;
 
 /**
  * @author doggy
@@ -54,47 +58,32 @@ public class Game {
 
         final GameTable gameTable = new GameTable();
 
-        if (new Random().nextBoolean()) {
-            computerMove.make(gameTable);
-            dataPrinter.printGameTable(gameTable);
-        }
+//        if (new Random().nextBoolean()) {
+//            computerMove.make(gameTable);
+//            dataPrinter.printGameTable(gameTable);
+//        }
 
-        final Move[] moves = {userMove, computerMove};
-
+        final Player[] players = {new Player(X, userMove), new Player(O, computerMove)};
         while (true) {
-
-            boolean gameOver = false;
-            for (Move move : moves) {
-                move.make(gameTable);
+            for (final Player player : players) {
+                player.makeMove(gameTable);
                 dataPrinter.printGameTable(gameTable);
-                if (move instanceof UserMove) {
-                    if (winnerVerifier.isUserWin(gameTable)) {
-                        System.out.println("ТЫ ПОБЕДИЛ!");
-                        gameOver = true;
-                        printGameOver();
-                        return;
-                    }
-                } else {
-                    if (winnerVerifier.isComputerWin(gameTable)) {
-                        System.out.println("КОПЬЮТЕР ПОБЕДИЛ!");
-                        gameOver = true;
-                        printGameOver();
-                        return;
-                    }
+                if (winnerVerifier.isWinner(gameTable, player)) {
+                    System.out.println(player + " ПОБЕДИЛ!");
+                    printGameOver();
+                    return;
                 }
 
                 if (cellVerifier.allCellsFilled(gameTable)) {
                     System.out.println("Извини, НИЧЬЯ!");
-                    gameOver = true;
                     printGameOver();
                     return;
                 }
             }
         }
-
     }
 
-    private static void printGameOver() {
+    private void printGameOver() {
         System.out.println("КОНЕЦ ИГРЫ!");
     }
 }

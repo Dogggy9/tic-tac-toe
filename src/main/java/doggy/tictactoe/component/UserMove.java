@@ -18,6 +18,7 @@ package doggy.tictactoe.component;
 
 import doggy.tictactoe.model.Cell;
 import doggy.tictactoe.model.GameTable;
+import doggy.tictactoe.model.Sign;
 
 import java.util.Scanner;
 
@@ -36,11 +37,11 @@ public class UserMove implements Move {
     }
 
     @Override
-    public void make(final GameTable gameTable) {
+    public void make(final GameTable gameTable, Sign sign) {
         while (true) {
             final Cell cell = getUserInput();
             if (gameTable.isEmpty(cell)) {
-                gameTable.setSign(cell, X);
+                gameTable.setSign(cell, sign);
                 return;
             } else {
                 System.out.println("Ячейка не пуста");
