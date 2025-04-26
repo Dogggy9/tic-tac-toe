@@ -19,6 +19,10 @@ package doggy.tictactoe;
 import doggy.tictactoe.component.*;
 import doggy.tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
 import doggy.tictactoe.component.keypad.TerminalNumericKeypadCellNumberConverter;
+import doggy.tictactoe.model.Player;
+
+import static doggy.tictactoe.model.Sign.O;
+import static doggy.tictactoe.model.Sign.X;
 
 /**
  * @author doggy
@@ -29,10 +33,13 @@ public final class Launcher {
         final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
         final Game game = new Game(
                 new DataPrinter(cellNumberConverter),
-                new UserMove(cellNumberConverter),
-                new ComputerMove(),
+//                new Player(X, new UserMove(cellNumberConverter)),
+//                new Player(O, new UserMove(cellNumberConverter)),
+                new Player(O, new ComputerMove()),
+                new Player(X, new ComputerMove()),
                 new WinnerVerifier(),
-                new CellVerifier()
+                new CellVerifier(),
+                false
         );
         game.play();
     }

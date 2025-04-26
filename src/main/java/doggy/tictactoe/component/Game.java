@@ -32,24 +32,27 @@ public class Game {
 
     private final DataPrinter dataPrinter;
 
-    private final UserMove userMove;
+    private final Player player1;
 
-    private final ComputerMove computerMove;
+    private final Player player2;
 
     private final WinnerVerifier winnerVerifier;
 
     private final CellVerifier cellVerifier;
 
-    public Game(final DataPrinter dataPrinter,
-                final UserMove userMove,
-                final ComputerMove computerMove,
-                final WinnerVerifier winnerVerifier,
-                final CellVerifier cellVerifier) {
+    private final boolean canSecondPlayerMakeFirstMove;
+
+    public Game(DataPrinter dataPrinter,
+                Player player1,
+                Player player2,
+                WinnerVerifier winnerVerifier,
+                CellVerifier cellVerifier, boolean canSecondPlayerMakeFirstMove) {
         this.dataPrinter = dataPrinter;
-        this.userMove = userMove;
-        this.computerMove = computerMove;
+        this.player1 = player1;
+        this.player2 = player2;
         this.winnerVerifier = winnerVerifier;
         this.cellVerifier = cellVerifier;
+        this.canSecondPlayerMakeFirstMove = canSecondPlayerMakeFirstMove;
     }
 
     public void play() {
@@ -58,12 +61,12 @@ public class Game {
 
         final GameTable gameTable = new GameTable();
 
-//        if (new Random().nextBoolean()) {
-//            computerMove.make(gameTable);
-//            dataPrinter.printGameTable(gameTable);
-//        }
+        if (canSecondPlayerMakeFirstMove && new Random().nextBoolean()) {
+            player2.makeMove(gameTable);
+            dataPrinter.printGameTable(gameTable);
+        }
 
-        final Player[] players = {new Player(X, userMove), new Player(O, computerMove)};
+        final Player[] players = {player1, player2};
         while (true) {
             for (final Player player : players) {
                 player.makeMove(gameTable);
