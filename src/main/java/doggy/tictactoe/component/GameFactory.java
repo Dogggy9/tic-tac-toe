@@ -4,7 +4,6 @@ import doggy.tictactoe.component.keypad.TerminalNumericKeypadCellNumberConverter
 import doggy.tictactoe.model.Player;
 import doggy.tictactoe.model.PlayerType;
 
-import static doggy.tictactoe.model.PlayerType.COMPUTER;
 import static doggy.tictactoe.model.PlayerType.USER;
 import static doggy.tictactoe.model.Sign.O;
 import static doggy.tictactoe.model.Sign.X;
@@ -16,31 +15,10 @@ public class GameFactory {
     private final PlayerType player2Type;
 
     public GameFactory(final String[] args) {
-        PlayerType player1Type = null;
-        PlayerType player2Type = null;
-        for (String arg : args) {
-            if (USER.name().equalsIgnoreCase(arg) || COMPUTER.name().equalsIgnoreCase(arg)) {
-                if (player1Type == null) {
-                    player1Type = PlayerType.valueOf(arg.toUpperCase());
-                } else if (player2Type == null) {
-                    player2Type = PlayerType.valueOf(arg.toUpperCase());
-                } else {
-                    System.err.println("Неподдерживаемый аргумент командной строки: '" + arg + "'");
-                }
-            } else {
-                System.err.println("Неподдерживаемый аргумент командной строки: '" + arg + "'");
-            }
-        }
-        if (player1Type == null) {
-            this.player1Type = USER;
-            this.player2Type = COMPUTER;
-        } else if (player2Type == null) {
-            this.player2Type = player1Type;
-            this.player1Type = USER;
-        } else {
-            this.player1Type = player1Type;
-            this.player2Type = player2Type;
-        }
+        final CommandLineArgumentParser.PlayerTypes playerTypes =
+                new CommandLineArgumentParser(args).parse();
+        this.player1Type = playerTypes.getPlayer1Type();
+        this.player2Type = playerTypes.getPlayer2Type();
     }
 
     public Game create() {
