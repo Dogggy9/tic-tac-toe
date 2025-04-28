@@ -27,7 +27,7 @@ import java.util.Random;
  */
 public class Game {
 
-    private final DataPrinterImpl dataPrinter;
+    private final DataPrinter dataPrinter;
 
     private final Player player1;
 
@@ -39,7 +39,7 @@ public class Game {
 
     private final boolean canSecondPlayerMakeFirstMove;
 
-    public Game(DataPrinterImpl dataPrinter,
+    public Game(DataPrinter dataPrinter,
                 Player player1,
                 Player player2,
                 WinnerVerifier winnerVerifier,
@@ -53,7 +53,7 @@ public class Game {
     }
 
     public void play() {
-        System.out.println("Используйте следующую таблицу сопоставлений, чтобы указать ячейку, используя цифры от 1 до 9.");
+        dataPrinter.printInfoMessage("Используйте следующую таблицу сопоставлений, чтобы указать ячейку, используя цифры от 1 до 9.");
         dataPrinter.printMappingTable();
 
         final GameTable gameTable = new GameTable();
@@ -69,13 +69,13 @@ public class Game {
                 player.makeMove(gameTable);
                 dataPrinter.printGameTable(gameTable);
                 if (winnerVerifier.isWinner(gameTable, player)) {
-                    System.out.println(player + " ПОБЕДИЛ!");
+                    dataPrinter.printInfoMessage(player + " ПОБЕДИЛ!");
                     printGameOver();
                     return;
                 }
 
                 if (cellVerifier.allCellsFilled(gameTable)) {
-                    System.out.println("Извини, НИЧЬЯ!");
+                    dataPrinter.printInfoMessage("Извини, НИЧЬЯ!");
                     printGameOver();
                     return;
                 }
@@ -84,6 +84,6 @@ public class Game {
     }
 
     private void printGameOver() {
-        System.out.println("КОНЕЦ ИГРЫ!");
+        dataPrinter.printInfoMessage("КОНЕЦ ИГРЫ!");
     }
 }

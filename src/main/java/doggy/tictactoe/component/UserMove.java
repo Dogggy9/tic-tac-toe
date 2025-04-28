@@ -20,44 +20,30 @@ import doggy.tictactoe.model.Cell;
 import doggy.tictactoe.model.GameTable;
 import doggy.tictactoe.model.Sign;
 
-import java.util.Scanner;
-
-import static doggy.tictactoe.model.Sign.X;
-
 /**
  * @author doggy
  * @link
  */
 public class UserMove implements Move {
 
-    private final CellNumberConverter cellNumberConverter;
+    private final UserInputReader userInputReader;
 
-    public UserMove(CellNumberConverter cellNumberConverter) {
-        this.cellNumberConverter = cellNumberConverter;
+    private final DataPrinter dataPrinter;
+
+    public UserMove(UserInputReader userInputReader, DataPrinter dataPrinter) {
+        this.userInputReader = userInputReader;
+        this.dataPrinter = dataPrinter;
     }
 
     @Override
     public void make(final GameTable gameTable, Sign sign) {
         while (true) {
-            final Cell cell = getUserInput();
+            final Cell cell = userInputReader.getUserInput();
             if (gameTable.isEmpty(cell)) {
                 gameTable.setSign(cell, sign);
                 return;
             } else {
-                System.out.println("Ячейка не пуста");
-            }
-        }
-    }
-
-    private Cell getUserInput() {
-        while (true) {
-            System.out.println("введите от 1 до 9");
-            final String userInput = new Scanner(System.in).nextLine();
-            if (userInput.length() == 1) {
-                char ch = userInput.charAt(0);
-                if (ch >= '1' && ch <= '9') {
-                    return cellNumberConverter.toCell(ch);
-                }
+                dataPrinter.printErrorMessage("Ячейка не пуста");
             }
         }
     }
