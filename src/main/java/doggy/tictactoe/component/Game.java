@@ -21,16 +21,13 @@ import doggy.tictactoe.model.Player;
 
 import java.util.Random;
 
-import static doggy.tictactoe.model.Sign.O;
-import static doggy.tictactoe.model.Sign.X;
-
 /**
  * @author doggy
  * @link
  */
 public class Game {
 
-    private final DataPrinter dataPrinter;
+    private final DataPrinterImpl dataPrinter;
 
     private final Player player1;
 
@@ -42,7 +39,7 @@ public class Game {
 
     private final boolean canSecondPlayerMakeFirstMove;
 
-    public Game(DataPrinter dataPrinter,
+    public Game(DataPrinterImpl dataPrinter,
                 Player player1,
                 Player player2,
                 WinnerVerifier winnerVerifier,
