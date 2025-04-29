@@ -1,12 +1,17 @@
 package doggy.tictactoe.component;
 
+import doggy.tictactoe.component.console.ConsoleDataPrinter;
+import doggy.tictactoe.component.console.ConsoleUserInputReader;
+import doggy.tictactoe.component.keypad.TerminalNumericKeypadCellNumberConverter;
 import doggy.tictactoe.component.swing.GameWindow;
 import doggy.tictactoe.model.Player;
 import doggy.tictactoe.model.PlayerType;
+import doggy.tictactoe.model.UserInterface;
 
 import static doggy.tictactoe.model.PlayerType.USER;
 import static doggy.tictactoe.model.Sign.O;
 import static doggy.tictactoe.model.Sign.X;
+import static doggy.tictactoe.model.UserInterface.GUI;
 
 public class GameFactory {
 
@@ -14,20 +19,29 @@ public class GameFactory {
 
     private final PlayerType player2Type;
 
+    private final UserInterface userInterface;
+
     public GameFactory(final String[] args) {
-        final CommandLineArgumentParser.PlayerTypes playerTypes =
+        final CommandLineArgumentParser.CommandLineArguments commandLineArguments =
                 new CommandLineArgumentParser(args).parse();
-        this.player1Type = playerTypes.getPlayer1Type();
-        this.player2Type = playerTypes.getPlayer2Type();
+        player1Type = commandLineArguments.getPlayer1Type();
+        player2Type = commandLineArguments.getPlayer2Type();
+        userInterface = commandLineArguments.getUserInterface();
     }
 
     public Game create() {
 
-        final GameWindow gameWindow = new GameWindow();
-
-        //final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
-        final DataPrinter dataPrinter = gameWindow; // new ConsoleDataPrinter(cellNumberConverter);
-        final UserInputReader userInputReader = gameWindow; // new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
+        final DataPrinter dataPrinter;
+        final UserInputReader userInputReader;
+        if (userInterface == GUI) {
+            final GameWindow gameWindow = new GameWindow();
+            dataPrinter = gameWindow;
+            userInputReader = gameWindow;
+        } else {
+            final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
+            dataPrinter = new ConsoleDataPrinter(cellNumberConverter);
+            userInputReader = new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
+        }
 
         final Player player1;
         if (player1Type == USER) {
