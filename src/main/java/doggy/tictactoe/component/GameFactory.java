@@ -1,8 +1,6 @@
 package doggy.tictactoe.component;
 
-import doggy.tictactoe.component.console.ConsoleDataPrinter;
-import doggy.tictactoe.component.console.ConsoleUserInputReader;
-import doggy.tictactoe.component.keypad.TerminalNumericKeypadCellNumberConverter;
+import doggy.tictactoe.component.swing.GameWindow;
 import doggy.tictactoe.model.Player;
 import doggy.tictactoe.model.PlayerType;
 
@@ -25,11 +23,11 @@ public class GameFactory {
 
     public Game create() {
 
-        final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
+        final GameWindow gameWindow = new GameWindow();
 
-        final DataPrinter dataPrinter = new ConsoleDataPrinter(cellNumberConverter);
-
-        final UserInputReader userInputReader = new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
+        //final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
+        final DataPrinter dataPrinter = gameWindow; // new ConsoleDataPrinter(cellNumberConverter);
+        final UserInputReader userInputReader = gameWindow; // new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
 
         final Player player1;
         if (player1Type == USER) {
