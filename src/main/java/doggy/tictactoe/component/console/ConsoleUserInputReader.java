@@ -1,9 +1,8 @@
 package doggy.tictactoe.component.console;
 
-import doggy.tictactoe.component.CellNumberConverter;
 import doggy.tictactoe.component.DataPrinter;
 import doggy.tictactoe.component.UserInputReader;
-import doggy.tictactoe.model.Cell;
+import doggy.tictactoe.model.game.Cell;
 
 import java.util.Scanner;
 

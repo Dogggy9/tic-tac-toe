@@ -1,17 +1,21 @@
-package doggy.tictactoe.component;
+package doggy.tictactoe;
 
+import doggy.tictactoe.component.*;
+import doggy.tictactoe.component.config.CommandLineArgumentParser;
+import doggy.tictactoe.component.console.CellNumberConverter;
 import doggy.tictactoe.component.console.ConsoleDataPrinter;
+import doggy.tictactoe.component.console.ConsoleGameOverHandler;
 import doggy.tictactoe.component.console.ConsoleUserInputReader;
-import doggy.tictactoe.component.keypad.TerminalNumericKeypadCellNumberConverter;
+import doggy.tictactoe.component.console.keypad.TerminalNumericKeypadCellNumberConverter;
 import doggy.tictactoe.component.swing.GameWindow;
-import doggy.tictactoe.model.Player;
-import doggy.tictactoe.model.PlayerType;
-import doggy.tictactoe.model.UserInterface;
+import doggy.tictactoe.model.game.Player;
+import doggy.tictactoe.model.config.PlayerType;
+import doggy.tictactoe.model.config.UserInterface;
 
-import static doggy.tictactoe.model.PlayerType.USER;
-import static doggy.tictactoe.model.Sign.O;
-import static doggy.tictactoe.model.Sign.X;
-import static doggy.tictactoe.model.UserInterface.GUI;
+import static doggy.tictactoe.model.config.PlayerType.USER;
+import static doggy.tictactoe.model.game.Sign.O;
+import static doggy.tictactoe.model.game.Sign.X;
+import static doggy.tictactoe.model.config.UserInterface.GUI;
 
 public class GameFactory {
 
@@ -33,14 +37,17 @@ public class GameFactory {
 
         final DataPrinter dataPrinter;
         final UserInputReader userInputReader;
+        final GameOverHandler gameOverHandler;
         if (userInterface == GUI) {
             final GameWindow gameWindow = new GameWindow();
             dataPrinter = gameWindow;
             userInputReader = gameWindow;
+            gameOverHandler = gameWindow;
         } else {
             final CellNumberConverter cellNumberConverter = new TerminalNumericKeypadCellNumberConverter();
             dataPrinter = new ConsoleDataPrinter(cellNumberConverter);
             userInputReader = new ConsoleUserInputReader(cellNumberConverter, dataPrinter);
+            gameOverHandler = new ConsoleGameOverHandler(dataPrinter);
         }
 
         final Player player1;
@@ -62,6 +69,7 @@ public class GameFactory {
                 player2,
                 new WinnerVerifier(),
                 new CellVerifier(),
+                gameOverHandler,
                 canSecondPlayerMakeFirstMove
         );
     }

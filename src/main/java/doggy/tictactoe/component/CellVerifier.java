@@ -16,8 +16,8 @@
 
 package doggy.tictactoe.component;
 
-import doggy.tictactoe.model.Cell;
-import doggy.tictactoe.model.GameTable;
+import doggy.tictactoe.model.game.Cell;
+import doggy.tictactoe.model.game.GameTable;
 
 /**
  * @author doggy

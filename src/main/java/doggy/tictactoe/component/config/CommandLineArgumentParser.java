@@ -1,12 +1,12 @@
-package doggy.tictactoe.component;
+package doggy.tictactoe.component.config;
 
-import doggy.tictactoe.model.PlayerType;
-import doggy.tictactoe.model.UserInterface;
+import doggy.tictactoe.model.config.PlayerType;
+import doggy.tictactoe.model.config.UserInterface;
 
-import static doggy.tictactoe.model.PlayerType.COMPUTER;
-import static doggy.tictactoe.model.PlayerType.USER;
-import static doggy.tictactoe.model.UserInterface.CONSOLE;
-import static doggy.tictactoe.model.UserInterface.GUI;
+import static doggy.tictactoe.model.config.PlayerType.COMPUTER;
+import static doggy.tictactoe.model.config.PlayerType.USER;
+import static doggy.tictactoe.model.config.UserInterface.CONSOLE;
+import static doggy.tictactoe.model.config.UserInterface.GUI;
 
 public class CommandLineArgumentParser {
 

@@ -16,13 +16,11 @@
 
 package doggy.tictactoe.component;
 
-import doggy.tictactoe.model.Cell;
-import doggy.tictactoe.model.GameTable;
-import doggy.tictactoe.model.Sign;
+import doggy.tictactoe.model.game.Cell;
+import doggy.tictactoe.model.game.GameTable;
+import doggy.tictactoe.model.game.Sign;
 
 import java.util.Random;
-
-import static doggy.tictactoe.model.Sign.O;
 
 /**
  * @author doggy

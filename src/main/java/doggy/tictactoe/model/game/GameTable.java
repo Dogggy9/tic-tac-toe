@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package doggy.tictactoe.model;
+package doggy.tictactoe.model.game;
 
 import java.util.Arrays;
 
-import static doggy.tictactoe.model.Sign.EMPTY;
+import static doggy.tictactoe.model.game.Sign.EMPTY;
 
 /**
  * @author doggy

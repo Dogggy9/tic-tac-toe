@@ -1,4 +1,4 @@
-package doggy.tictactoe.model;
+package doggy.tictactoe.model.game;
 
 public enum Sign {
 

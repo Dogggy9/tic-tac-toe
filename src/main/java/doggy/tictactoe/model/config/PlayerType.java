@@ -1,4 +1,4 @@
-package doggy.tictactoe.model;
+package doggy.tictactoe.model.config;
 
 public enum PlayerType {
 

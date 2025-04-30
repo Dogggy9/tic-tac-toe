@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package doggy.tictactoe.model;
+package doggy.tictactoe.model.game;
 
 /**
  * @author doggy

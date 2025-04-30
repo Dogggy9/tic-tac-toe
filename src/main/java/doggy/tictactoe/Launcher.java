@@ -17,12 +17,6 @@
 package doggy.tictactoe;
 
 import doggy.tictactoe.component.*;
-import doggy.tictactoe.component.keypad.DesktopNumericKeypadCellNumberConverter;
-import doggy.tictactoe.component.keypad.TerminalNumericKeypadCellNumberConverter;
-import doggy.tictactoe.model.Player;
-
-import static doggy.tictactoe.model.Sign.O;
-import static doggy.tictactoe.model.Sign.X;
 
 /**
  * @author doggy

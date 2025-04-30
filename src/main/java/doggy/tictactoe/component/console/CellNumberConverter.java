@@ -1,6 +1,6 @@
-package doggy.tictactoe.component;
+package doggy.tictactoe.component.console;
 
-import doggy.tictactoe.model.Cell;
+import doggy.tictactoe.model.game.Cell;
 
 public interface CellNumberConverter {
 

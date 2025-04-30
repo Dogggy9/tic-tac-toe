@@ -1,9 +1,8 @@
 package doggy.tictactoe.component.console;
 
-import doggy.tictactoe.component.CellNumberConverter;
 import doggy.tictactoe.component.DataPrinter;
-import doggy.tictactoe.model.Cell;
-import doggy.tictactoe.model.GameTable;
+import doggy.tictactoe.model.game.Cell;
+import doggy.tictactoe.model.game.GameTable;
 
 public class ConsoleDataPrinter implements DataPrinter {
 
@@ -14,6 +13,12 @@ public class ConsoleDataPrinter implements DataPrinter {
     }
 
     @Override
+    public void printInstructions() {
+        printInfoMessage("Используйте следующую таблицу сопоставлений, чтобы указать ячейку, используя цифры от 1 до 9.");
+        print((i, j) -> String.valueOf(cellNumberConverter.toNumber(new Cell(i, j))));
+    }
+
+    @Override
     public void printInfoMessage(String message) {
         System.out.println(message);
     }
@@ -21,13 +26,6 @@ public class ConsoleDataPrinter implements DataPrinter {
     @Override
     public void printErrorMessage(String message) {
         System.err.println(message);
-    }
-
-    @Override
-    public void printMappingTable() {
-
-        print((i, j) -> String.valueOf(cellNumberConverter.toNumber(new Cell(i, j))));
-
     }
 
     @Override

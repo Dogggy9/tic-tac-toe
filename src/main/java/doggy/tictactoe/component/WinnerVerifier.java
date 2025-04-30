@@ -16,13 +16,10 @@
 
 package doggy.tictactoe.component;
 
-import doggy.tictactoe.model.Cell;
-import doggy.tictactoe.model.GameTable;
-import doggy.tictactoe.model.Player;
-import doggy.tictactoe.model.Sign;
-
-import static doggy.tictactoe.model.Sign.O;
-import static doggy.tictactoe.model.Sign.X;
+import doggy.tictactoe.model.game.Cell;
+import doggy.tictactoe.model.game.GameTable;
+import doggy.tictactoe.model.game.Player;
+import doggy.tictactoe.model.game.Sign;
 
 /**
  * @author doggy

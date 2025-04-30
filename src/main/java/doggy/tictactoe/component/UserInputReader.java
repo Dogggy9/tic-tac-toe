@@ -1,6 +1,6 @@
 package doggy.tictactoe.component;
 
-import doggy.tictactoe.model.Cell;
+import doggy.tictactoe.model.game.Cell;
 
 public interface UserInputReader {
 

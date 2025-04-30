@@ -1,7 +1,7 @@
-package doggy.tictactoe.component.keypad;
+package doggy.tictactoe.component.console.keypad;
 
-import doggy.tictactoe.component.CellNumberConverter;
-import doggy.tictactoe.model.Cell;
+import doggy.tictactoe.component.console.CellNumberConverter;
+import doggy.tictactoe.model.game.Cell;
 
 public class TerminalNumericKeypadCellNumberConverter implements CellNumberConverter {
 
