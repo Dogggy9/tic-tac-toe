@@ -16,7 +16,7 @@ mvn clean package
 
 ## Инструкции по выполнению
 
-- Скачать [OpenJDK 11](https://jdk.java.net/21/)
+- Скачать [OpenJDK 21](https://jdk.java.net/21/)
 - Распакуйте загруженный архив OpenJDK;
 - Настройте переменную окружения `PATH`:
     - Добавить `%JDK_HOME%\bin\` directory for Windows;
