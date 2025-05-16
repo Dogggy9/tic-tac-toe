@@ -1,14 +1,34 @@
-# The ${project.name} Project
+# The Tic Tac Toe Project
 
 -----------------------------------------------------------------------------------
 
-## Build instructions
+## Инструкция по сборке
 
-TODO
+- Сборка дистрибутивов с помощью инструмента maven
 
-## Run instructions
+```bash
+mvn clean package
+```
 
-TODO
+- Используйте следующие архивы:
+    - `target/tic-tac-toe-2.0-SNAPSHOT-windows.zip` for Windows
+    - `target/tic-tac-toe-2.0-SNAPSHOT-unix.tar.gz` for MacOS and Linux
+
+## Инструкции по выполнению
+
+- Скачать [OpenJDK 11](https://jdk.java.net/21/)
+- Распакуйте загруженный архив OpenJDK;
+- Настройте переменную окружения `PATH`:
+    - Добавить `%JDK_HOME%\bin\` directory for Windows;
+    - Добавить `%JDK_HOME%/bin/` directory for MacOS and Linux;
+- Повторно войдите в систему или перезагрузите компьютер
+- Распакуйте дистрибутив Tic tac toe:
+    - Распакуйте `tic-tac-toe-${project.version}-windows.zip` for Windows
+    - Распакуйте `tic-tac-toe-${project.version}-windows.zip` for MacOS and Linux
+- Перейдите в распакованный каталог;
+- Запустите игру, дважды щелкнув на стартовом скрипте:
+    - `start.cmd` for Windows;
+    - `start.sh` for MacOS and Linux;
 
 -----------------------------------------------------------------------------------
 
