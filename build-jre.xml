@@ -1,0 +1,28 @@
+<project name="Build JRE for tic-tac-toe game" default="build-jre" basedir=".">
+    <!-- ************* SCRIPT CONFIG ************************** -->
+    <!-- JPMS modules -->
+    <property name="java.modules"
+              value="java.base"/>
+
+    <!-- Target directories -->
+    <property name="target-tmp-dir"
+              value=".tmp"/>
+    <property name="jre-windows-dir-name"
+              value="jre-windows"/>
+    <property name="jre-macos-dir-name"
+              value="jre-macos"/>
+    <property name="jre-linux-dir-name"
+              value="jre-linux"/>
+
+    <!-- JDK download links -->
+    <property name="jdk-windows-download-link"
+              value="https://download.oracle.com/java/21/archive/jdk-21.0.6_windows-x64_bin.zip"/>
+    <property name="jdk-macos-download-link"
+              value="https://download.oracle.com/java/21/archive/jdk-21.0.6_macos-x64_bin.tar.gz"/>
+    <property name="jdk-linux-download-link"
+              value="https://download.oracle.com/java/21/archive/jdk-21.0.6_linux-x64_bin.tar.gz"/>
+
+    <property environment="env"/>
+
+    <!-- ***************************** TARGETS **************************** -->
+</project>
