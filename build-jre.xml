@@ -25,4 +25,45 @@
     <property environment="env"/>
 
     <!-- ***************************** TARGETS **************************** -->
+    <target name="build-jre"
+            depends="build-windows-jre, build-macos-jre, build-linux-jre"/>
+
+    <target name="init">
+        <mkdir dir="${target-tmp-dir}"/>
+        <mkdir dir="${target-tmp-dir}/jdk"/>
+    </target>
+
+    <!-- ************************** FOR WINDOWS PLATFORM *********************** -->
+    <condition property="isCurrentWindows">
+        <os family="windows"/>
+    </condition>
+
+    <condition property="isWindowsJreBuilt">
+        <available file="${target-tmp-dir}/${jre-windows-dir-name}/bin/java.exe"/>
+    </condition>
+
+    <target name="build-windows-jre" depends="init" unless="isWindowsJreBuilt">
+        <antcall target="build-windows-jre-if-windows"/>
+        <antcall target="build-windows-jre-if-not-windows"/>
+    </target>
+
+    <target name="build-windows-jre-if-windows" if="isCurrentWindows">
+        <build-jre modulePath="${env.JAVA_HOME}/jmods/" destDir="jre-window"/>
+    </target>
+
+    <target name="build-windows-jre-if-not-windows" unless="isCurrentWindows">
+        <antcall target="download-windows-jdk"/>
+        <build-jre modulePath="${target-tmp-dir}/jdk/jdk-windows/jdk-21.0.6/jmods"
+                   destDir="jre-windows"/>
+    </target>
+
+    <target name="download-windows-jdk">
+        <echo level="info"
+              message="Download JDK using '${jdk-windows-download-link}' link"/>
+        <get src="${jdk-windows-download-link}" dest="${target-tmp-dir}/jdk/jdk-windows.zip" skipexisting="true"/>
+        <unzip src="${target-tmp-dir}/jdk/jdk-windows.zip" dest="${target-tmp-dir}/jdk/jdk-windows"/>
+    </target>
+
+    <!-- ******************FOR MACOS PLATFORM ************************** -->
+
 </project>
