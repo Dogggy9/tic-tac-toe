@@ -1,4 +1,5 @@
 <project name="Build JRE for tic-tac-toe game" default="build-jre" basedir=".">
+
     <!-- ************* SCRIPT CONFIG ************************** -->
     <!-- JPMS modules -->
     <property name="java.modules"
@@ -48,7 +49,7 @@
     </target>
 
     <target name="build-windows-jre-if-windows" if="isCurrentWindows">
-        <build-jre modulePath="${env.JAVA_HOME}/jmods/" destDir="jre-window"/>
+        <build-jre modulePath="${env.JAVA_HOME}/jmods/" destDir="jre-windows"/>
     </target>
 
     <target name="build-windows-jre-if-not-windows" unless="isCurrentWindows">
@@ -66,4 +67,86 @@
 
     <!-- ******************FOR MACOS PLATFORM ************************** -->
 
+    <condition property="isCurrentMacos">
+        <os family="mac"/>
+    </condition>
+
+    <condition property="isMacosJreBuilt">
+        <available file="${target-tmp-dir}/${jre-macos-dir-name}/bin/java"/>
+    </condition>
+
+    <target name="build-macos-jre" depends="init" unless="isMacosJreBuilt">
+        <antcall target="build-macos-jre-if-macos"/>
+        <antcall target="build-macos-jre-if-not-macos"/>
+    </target>
+
+    <target name="build-macos-jre-if-macos" if="isCurrentMacos">
+        <build-jre modulePath="${env.JAVA_HOME}/jmods/" destDir="jre-macos-dir-name"/>
+    </target>
+
+    <target name="build-macos-jre-if-not-macos" unless="isCurrentMacos">
+        <antcall target="download-macos-jdk"/>
+        <build-jre modulePath="${target-tmp-dir}/jdk/jdk-macos/jdk-21.0.6.jdk/Contents/Home/jmods"
+                   destDir="${jre-macos-dir-name}"/>
+    </target>
+
+    <target name="download-macos-jdk">
+        <echo level="info"
+              message="Download JDK using '${jdk-macos-download-link}' link"/>
+        <get src="${jdk-macos-download-link}" dest="${target-tmp-dir}/jdk/jdk-macos.tar.gz" skipexisting="true"/>
+        <untar src="${target-tmp-dir}/jdk/jdk-macos.tar.gz" dest="${target-tmp-dir}/jdk/jdk-macos" compression="gzip"/>
+    </target>
+
+    <!-- ******************FOR LINUX PLATFORM ************************** -->
+
+    <condition property="isCurrentLinux">
+        <and>
+            <os family="unix"/>
+            <not>
+                <os family="macos"/>
+            </not>
+        </and>
+    </condition>
+
+    <condition property="isLinuxJreBuilt">
+        <available file="${target-tmp-dir}/${jre-linux-dir-name}/bin/java"/>
+    </condition>
+
+    <target name="build-linux-jre" depends="init" unless="isLinuxJreBuilt">
+        <antcall target="build-linux-jre-if-linux"/>
+        <antcall target="build-linux-jre-if-not-linux"/>
+    </target>
+
+    <target name="build-linux-jre-if-linux" if="isCurrentMacos">
+        <build-jre modulePath="${env.JAVA_HOME}/jmods/" destDir="${jre-linux-dir-name}"/>
+    </target>
+
+    <target name="build-linux-jre-if-not-linux" unless="isCurrentLinux">
+        <antcall target="download-linux-jdk"/>
+        <build-jre modulePath="${target-tmp-dir}/jdk/jdk-linux/jdk-21.0.6/jmods"
+                   destDir="${jre-linux-dir-name}"/>
+    </target>
+
+    <target name="download-linux-jdk">
+        <echo level="info"
+              message="Download JDK using '${jdk-linux-download-link}' link"/>
+        <get src="${jdk-linux-download-link}" dest="${target-tmp-dir}/jdk/jdk-linux.tar.gz" skipexisting="true"/>
+        <untar src="${target-tmp-dir}/jdk/jdk-linux.tar.gz" dest="${target-tmp-dir}/jdk/jdk-linux" compression="gzip"/>
+    </target>
+
+    <!-- ************************* MACRO DEFINITIONS ***************************** -->
+    <macrodef name="build-jre">
+        <attribute name="destDir"/>
+        <attribute name="modulePath"/>
+        <sequential>
+            <echo level="info"
+                  message="Build JRE using '@{modulePath}' moule path into '${target-tmp-dir}/@{destDir}' directory"/>
+            <exec executable="${env.JAVA_HOME}/bin/jlink" failonerror="true">
+                <arg line="--add-modules '${java.modules}'"/>
+                <arg line="--module-path '@{modulePath}'"/>
+                <arg line="--output '${target-tmp-dir}/@{destDir}'"/>
+                <arg line="--no-header-files --no-man-pages --compress 2"/>
+            </exec>
+        </sequential>
+    </macrodef>
 </project>
