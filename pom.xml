@@ -69,15 +69,8 @@
         <maven-project-info-reports-plugin.version>3.9.0</maven-project-info-reports-plugin.version>
 
         <!-- Maven additional plugins -->
-        <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
         <maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
-
-        <!-- Project dependencies -->
-        <commons-lang3.version>3.17.0</commons-lang3.version>
-        <logback-classic.version>1.5.18</logback-classic.version>
-
-        <!-- Configuration -->
-        <maven-dependency-plugin.copy-dependencies.skip>false</maven-dependency-plugin.copy-dependencies.skip>
+        <maven-antrun-plugin.version>3.1.0</maven-antrun-plugin.version>
     </properties>
 
     <build>
@@ -131,27 +124,6 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>${maven-dependency-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                            <stripVersion>true</stripVersion>
-                            <skip>${maven-dependency-plugin.copy-dependencies.skip}</skip>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
     </build>
     <profiles>
         <profile>
@@ -172,19 +144,11 @@
                                 <configuration>
                                     <descriptors>
                                         <descriptor>src/assembly/distribution-windows.xml</descriptor>
+                                        <descriptor>src/assembly/distribution-unix.xml</descriptor>
                                     </descriptors>
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
-
-                    <plugin>
-                        <artifactId>maven-jlink-plugin</artifactId>
-                        <version>3.2.0</version>
-                        <extensions>true</extensions>
-                        <configuration>
-                            <!-- configuration elements goes here -->
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -194,7 +158,25 @@
             <id>with-jre</id>
             <build>
                 <plugins>
-
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>${maven-antrun-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <configuration>
+                                    <target>
+                                        <ant antfile="${project.basedir}/build-jre.xml">
+                                            <target name="build-jre"/>
+                                        </ant>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
                     <plugin>
                         <artifactId>maven-assembly-plugin</artifactId>
                         <version>${maven-assembly-plugin.version}</version>
@@ -217,16 +199,4 @@
             </build>
         </profile>
     </profiles>
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${commons-lang3.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback-classic.version}</version>
-        </dependency>
-    </dependencies>
 </project>
